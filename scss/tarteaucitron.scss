@@ -1,0 +1,874 @@
+.tarteaucitron-modal-open {
+    overflow: hidden;
+}
+
+/***
+ * Fallback activate link
+ */
+.tac_activate {
+    background: #333;
+    color: #fff;
+    display: block;
+    font-size: 12px;
+    height: 100%;
+    line-height: initial;
+    margin: auto;
+    text-align: center;
+    width: 100%;
+    padding: 10px;
+
+    .ctaBtn {
+        color: #fff;
+        cursor: pointer;
+        font-size: 16px;
+        line-height: 1.2;
+        padding: 5px 10px;
+        text-decoration: none;
+        border-radius: 5px;
+        white-space: nowrap;
+        margin-left: 5px;
+        margin-right: 5px;
+        border:none;
+
+        &.btnAllow {
+            background-color: #008300;
+
+            &:hover {
+                background-color: darken(#008300, 5%);
+            }
+        }
+    }
+}
+
+/***
+ * CSS for services
+ */
+ins.ferank-publicite, ins.adsbygoogle {
+    text-decoration: none;
+}
+
+div.amazon_product {
+    height:240px;
+    width:120px;
+}
+
+#tarteaucitronRoot {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+
+    &.show {
+        height: auto;
+        min-height: 100%;
+    }
+
+    /* Animation */
+    * {transition: border 300ms, background 300ms, opacity 200ms, box-shadow 400ms}
+
+    /* Reset */
+    button {
+        background: transparent;
+        border: none;
+    }
+
+    ul {
+        padding: 0;
+        margin-bottom: 0;
+    }
+
+    /* Icon for btn */
+    .cross::before {
+        content: '\2717';
+        display: inline-block;
+        color: white;
+        margin-right: 5px;
+    }
+
+    .check::before {
+        content: '\2713';
+        display: inline-block;
+        color: white;
+        margin-right: 5px;
+    }
+
+    .tarteaucitronPlus::before {
+        content: '\271b';
+        display: inline-block;
+        color: white;
+        margin-right: 5px;
+    }
+
+    .back {
+        background: #fff;
+        display: none;
+        height: 100%;
+        position: fixed;
+        left: 0;
+        opacity: 0.7;
+        top: 0;
+        width: 100%;
+        z-index: 2147483645;
+        &.show {
+            display: block;
+        }
+    }
+
+    .ctaBtn {
+        color: #fff;
+        cursor: pointer;
+        font-size: 16px;
+        line-height: 1.2;
+        padding: 5px 10px;
+        text-decoration: none;
+        border-radius: 5px;
+        white-space: nowrap;
+        margin-left: 5px;
+        margin-right: 5px;
+
+        &.btnAllow {
+            background-color: #008300;
+
+            &:hover {
+                background-color: darken(#008300, 5%);
+            }
+        }
+
+        &.btnDeny {
+            background: #9C1A1A;
+
+            &:hover {
+                background-color: darken(#9C1A1A, 5%);
+            }
+        }
+
+        &.personalize {
+            background-color: #fff;
+            color: #333;
+
+            &:hover {
+                background-color: #cccccc;
+            }
+        }
+
+        &.privacyUrl,
+        &.privacyUrlDialog {
+            color: #FFF;
+            &:hover {
+                color: #cccccc;
+            }
+        }
+    }
+
+    .tacH3 {
+        font-weight: 700 !important;
+    }
+
+    #tarteaucitron {
+        max-width: 100%;
+        z-index: 2147483647;
+        position: fixed;
+        overflow: scroll;
+        max-height: 98vh;
+        padding: 15px;
+        display: none;
+
+        @media screen and (min-width: 600px){
+            max-width: 90%;
+        }
+        @media screen and (min-width: 768px){
+            padding: 0;
+            max-width: 80%;
+        }
+
+        @media screen and (min-width: 900px){
+            max-width: 800px;
+        }
+
+        a {
+            color: rgb(66, 66, 66);
+            font-size: 11px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .selfLink {
+            text-align: center;
+            display: block;
+        }
+
+        &.show {
+            display: block;
+        }
+
+        .hide {
+            display: none !important;
+        }
+
+        .tacH3 {
+            font-size: 18px;
+        }
+
+        #services {
+            .catLine {
+                background: rgba(51, 51, 51, 0.07);
+                display: none;
+
+                &.show {
+                    display: block;
+                }
+
+                .tacToggleGroupe {
+                    cursor: pointer;
+
+                    &:after {
+                        width: 8px;
+                        height: 8px;
+                        content: " ";
+                        display: inline-block;
+                        margin-left: 15px;
+                        background-size: 8px;
+                        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 7 6"><defs><path id="a" d="M.336 6.004h6.328c.3829 0 .3477-.7188.3087-1.0782-.0118-.1094-.0704-.2735-.129-.3672L3.957.3789c-.2539-.5039-.664-.5039-.918 0L.1524 4.5586c-.0546.0937-.1171.2578-.1289.3672-.039.3594-.0703 1.0781.3125 1.0781Zm0 0"/></defs><use xlink:href="%23a"/><use xlink:href="%23a"/></svg>') no-repeat;
+                    }
+                }
+
+                &.tacIsExpanded {
+                    .tacToggleGroupe{
+                        &:after {
+                            margin-left: 15px;
+                            background-size: 8px;
+                            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 7 6"><defs><path id="a" d="M.1523 1.4453 3.0391 5.625c.2539.504.664.504.918 0l2.8866-4.1836c.0586-.0898.1172-.2539.129-.3633C7.0117.7187 7.0469 0 6.664 0H.3359C-.0469 0-.0156.7188.0234 1.0781c.0118.1094.0743.2735.129.3672Zm0 0"/></defs><use xlink:href="%23a"/><use xlink:href="%23a"/></svg>') no-repeat;
+                        }
+                    }
+                }
+            }
+
+            #services_mandatory {
+                .tacH3 {
+                    font-weight: 500!important;
+                    font-size: 14px;
+                }
+
+                .btnAllow {
+                    opacity: 1;
+                }
+            }
+
+            .catToggleBtn {
+                color: #fff;
+                font-size: 14px;
+                font-weight: 700;
+                margin: 20px 0 0;
+                padding: 5px 20px;
+                background: #333;
+            }
+
+            .tarteaucitronDetails {
+                display: none;
+                color: #fff;
+                font-size: 14px;
+                font-weight: 700;
+                padding: 5px 20px;
+                background: #333;
+                max-width: 270px;
+                position: absolute;
+                z-index: 2147483647;
+
+                &.show{
+                    display: block;
+                }
+            }
+
+            .servicesCtn {
+                display: none;
+
+                &.show {
+                    display: block;
+                }
+            }
+
+            .line,
+            .mainLine {
+                .ask {
+                    display: flex;
+                    margin: 10px 15px 5px;
+                    flex-direction: column;
+
+                    .btnAllow,
+                    .btnDeny {
+                        background: #808080;
+                        opacity: 0.4;
+                        margin-bottom: 5px;
+
+                        &:hover {
+                            background-color: #aaaaaa;
+                        }
+
+                        @media screen and (min-width:768px) {
+                            margin-bottom: 0;
+                        }
+                    }
+
+
+                    @media screen and (min-width:550px) {
+                        margin:0;
+                    }
+                    @media screen and (min-width:256px) {
+                        flex-direction: row;
+                    }
+                }
+
+                &.isAllowed {
+                    .btnAllow {
+                        opacity: 1!important;
+                        background-color: #1B870B;
+                    }
+                }
+
+                &.isDenied {
+                    .btnDeny {
+                        background-color: #9C1A1A;
+                        opacity: 1;
+                    }
+                }
+
+                .tarteaucitronIsSelected {
+                    &.btnAllow {
+                        opacity: 1!important;
+                        background-color: #1B870B;
+                    }
+                    &.btnDeny {
+                        opacity: 1 !important;
+                        background-color: #9C1A1A;
+                    }
+                }
+            }
+        }
+
+        .tarteaucitronBorder {
+            background: #fff;
+            border: none;
+
+            @media screen and (min-width:768px) {
+                border: 2px solid #333;
+            }
+        }
+
+        .closeBtnCtn {
+            display: flex;
+            justify-content: end;
+        }
+
+        .line {
+            border-left: 5px solid transparent;
+            background: rgba(51, 51, 51, 0.1);
+            padding: 15px 5px;
+        }
+
+        .serviceLine, .line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            color: #333;
+            width: 100%;
+
+            &:hover {
+                background: rgba(51, 51, 51, 0.2);
+            }
+
+            @media (screen and min-width: 550px){
+                flex-direction: row;
+                text-align: left;
+            }
+
+            .name {
+                padding-right: 10px;
+                font-size: 14px;
+
+                .tacCurrentStatus,
+                .readMoreSeparator{
+                    font-size: 12px!important;
+                    text-transform: capitalize;
+                }
+
+                .readMoreSeparator {
+                    padding-left: 5px;
+                    padding-right: 5px;
+                }
+
+                .listCookie {
+                    font-size: 12px;
+                }
+
+                a {
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+            &.isAllowed {
+                border-color: #1B870B;
+            }
+
+            &.isDenied {
+                border-color: #9C1A1A;
+            }
+        }
+
+        .mainLine {
+            margin-top: 0!important;
+            padding-bottom: 15px;
+            background: #333;
+            border: 3px solid #333;
+            margin-bottom: 0;
+            position: relative;
+            font-size: 14px;
+            color: #fff;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .serviceLine {
+                margin-top: 20px;
+                flex-direction: column;
+                .name {
+                    padding-right: 0;
+                }
+
+                @media screen and (min-width: 768px) {
+                    flex-direction: row;
+                    .name {
+                        padding-right: 10px;
+                    }
+                }
+            }
+
+            .tacH1 {
+                font-size: 1.5em;
+                text-align: center;
+                color: #fff;
+                margin: 15px 0 28px;
+            }
+
+            .tacH2 {
+                font-size: 1.2em!important;
+                color: #fff;
+            }
+
+            #info {
+                padding: 15px 0!important;
+                font-size: 1em ;
+                border-bottom: 1px solid;
+                border-top: 1px solid;
+                border-color: #555;
+                font-weight: 500;
+                display: flex;
+                flex-direction: column;
+
+                @media screen and (min-width: 768px){
+                    max-width: 80%;
+
+                }
+            }
+        }
+
+        .closePanel {
+            background: #333333;
+            color: #fff;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            padding: 4px 16px;
+            text-align: center;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+    }
+
+    .alertBig {
+        background: #333;
+        color: #fff;
+        display: none;
+        flex-direction: column;
+        font-size: 15px;
+        z-index: 2147483645;
+        text-align: center;
+        box-shadow: 0 0 9000px #000;
+        border-radius: 20px;
+        padding: 10px 25px 35px;
+        position: fixed;
+
+        &.show {
+            display: flex;
+        }
+
+        &:focus {
+            outline: 0;
+        }
+
+        .closeCross {
+            color: #FFFF;
+            cursor: pointer;
+            align-self: end;
+        }
+
+        .beforeDisclaimer {
+            font-size: 35px;
+            color: #fff;
+            text-align: center;
+        }
+
+        .disclaimerAlert {
+            margin: 10px 0 30px;
+            display: block;
+            text-align: center;
+            font-size: 16px;
+
+            div {
+                font-weight: 700;
+                margin-top: 10px;
+            }
+
+            @media screen and (min-width: 768px){
+                font-size: 21px;
+
+            }
+        }
+
+        .askContainer {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+
+            @media screen and (min-width: 700px) {
+                flex-direction: row;
+            }
+        }
+
+        @media screen and (max-width: 900px) {
+            .ctaBtn {
+                margin-bottom: 10px;
+            }
+        }
+    }
+
+    .alertSmall {
+        background: #fff;
+        display: none;
+        padding: 0;
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        text-align: center;
+        width: auto;
+        z-index: 2147483646;
+        flex-direction: column;
+
+        &.show {
+            display: flex;
+        }
+
+        .managerCtn {
+            display: flex;
+            align-self: end;
+            background-color: #333;
+            order: 10;
+
+            .manager {
+                #tacDot {
+                    background-color: gray;
+                    border-radius: 5px;
+                    height: 8px;
+                    margin-bottom: 1px;
+                    margin-top: 5px;
+                    overflow: hidden;
+                    display: flex;
+
+                    #tacDotGreen,
+                    #tacDotYellow,
+                    #tacDotRed {
+
+                        /*display: block;
+                        float: left;*/
+                    }
+
+                    #tacDotGreen {
+                        background-color: #1B870B;
+                    }
+
+                    #tacDotYellow {
+                        background-color: #FBDA26;
+                    }
+
+                    #tacDotRed {
+                        background-color: #9C1A1A;
+                    }
+                }
+            }
+        }
+
+        #cookieNumber {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 30px;
+            padding: 0 10px;
+            &:hover {
+                background: rgba(255, 255, 255, 0.3);
+            }
+        }
+
+        #clCtn {
+            display: none;
+            max-height: 70%;
+            max-width: 500px;
+            flex-direction: column;
+            padding: 0 0 5px 5px;
+
+
+            &.show {
+                display: flex;
+            }
+
+            .cookieNumber{
+                color: #fff;
+                background-color: #333;
+                text-align: start;
+                padding: 5px 10px;
+            }
+
+            #tarteaucitronCookiesList {
+                border: 2px solid #333;
+                color: #333;
+                font-size: 11px;
+                text-align: left;
+            }
+
+            .clLine {
+                background-color: rgba(#333, 0.07);
+                padding-top: 15px;
+
+                .title {
+                    color: #fff;
+                    font-size:14px;
+                    font-weight: bold;
+                    background-color: #333;
+                    padding: 5px 10px;
+                    display: inline;
+                }
+
+                .cookie-list {
+
+                    .clMain{
+                        background-color: rgba(#333, 0.1);
+                        word-wrap: break-word;
+                        word-break: break-word;
+                        display: flex;
+                        padding: 5px;
+
+                        .clLeft {
+                            display:flex;
+                            font-weight: bold;
+                            flex: 1 1 0;
+                            padding-right: 7px;
+                            align-items: center;
+
+                            .purgeBtn {
+                                padding: 0 7px;
+                            }
+                        }
+
+                        .clRight {
+                            flex: 1 1 0;
+                        }
+
+                        &:hover{
+                            background-color: rgba(#333, 0.2);
+                        }
+                    }
+                }
+            }
+        }
+
+        #tarteaucitronManager {
+            color: #fff;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 11px !important;
+            padding: 8px 10px 8px;
+        }
+    }
+
+    /* Adjust design for each position ! */
+    &.tac-top,
+    &.tac-bottom {
+        padding: 0;
+        .back {
+            height: 0;
+        }
+
+        .alertBig {
+            width: 100%;
+            border-radius: 0;
+            flex-direction: column;
+            padding: 10px 15px;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            transform: none;
+
+            &.alertBigTop {
+                top: 0;
+            }
+
+            &.alertBigBottom {
+                bottom: 0;
+            }
+
+            @media (screen and min-width: 1100px) {
+                flex-direction: row;
+            }
+
+            .beforeDisclaimer {
+                display: none;
+            }
+
+            .disclaimerAlert {
+                font-size: 13px;
+                margin: 0 10px 10px;
+
+                @media (screen and min-width: 1100px) {
+                    margin-bottom: 0;
+                }
+            }
+
+            .ctaBtn {
+                font-size: 13px;
+            }
+
+            .closeCross {
+                position: absolute;
+                right: 20px;
+            }
+        }
+    }
+    &.tac-top {
+        align-items: start;
+    }
+    &.tac-bottom {
+        align-items: end;
+    }
+    &.tac-popup {
+        width: min(250px, calc(100% - 16px));
+
+        padding: 0 0 0 8px;
+        font-size: 12px;
+        align-items: end;
+
+        &.openPanel{
+            width: 100%;
+            padding: 0 15px;
+        }
+
+        .back {
+            height: 0;
+        }
+
+        .disclaimerAlert {
+            margin-bottom: 5px;
+            font-size: 14px;
+            padding: 0 10px;
+        }
+        .beforeDisclaimer {
+            padding: 0 10px;
+            font-size: 16px;
+        }
+
+        .ctaBtn {
+            font-size: 13px;
+            margin: 5px;
+            width: 100%;
+        }
+        .askContainer, .optLine {
+            flex-direction: column;
+        }
+
+
+        .alertBig {
+            box-shadow: none;
+            bottom: 0;
+            top: auto;
+            left: 8px;
+            right: auto;
+            transform: initial;
+            border-radius: 5px 5px 0 0;
+            min-width: 0;
+            padding: 25px 0;
+            width: inherit;
+            position: fixed;
+
+            .closeCross {
+                margin-right: 15px;
+            }
+
+            .askBtnContainer, .optLine {
+                display: flex;
+                flex-direction: column;
+
+                .ctaBtn {
+                    width: auto;
+                }
+            }
+        }
+    }
+    &.tac-middle {
+        .alertBig {
+            top: 50%;
+            transform: translateY(-50%);
+            margin: 15px;
+        }
+    }
+
+    /* Icon */
+    #tacIcon {
+        background: transparent;
+        position: fixed;
+        display: none;
+        width: auto;
+        z-index: 2147483646;
+        &.show {
+            display: block;
+        }
+
+        /***
+         * Icon Position
+         */
+        &.iconBottomRight {
+            bottom: 0;
+            right: 0;
+        }
+        &.iconBottomLeft {
+            bottom: 0;
+            left: 0;
+        }
+        &.iconTopRight {
+            top: 0;
+            right: 0;
+        }
+        &.iconTopLeft {
+            top: 0;
+            left: 0;
+        }
+    }
+}
