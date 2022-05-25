@@ -40,8 +40,6 @@ export let pinterestpixel = {
     "options": {},
     "cookies": ['_pinterest_sess', '_pinterest_ct', '_pinterest_ct_mw', '_pinterest_ct_rt', '_epik', '_derived_epik', '_pin_unauth', '_pinterest_ct_ua'],
     "js": function () {
-
-        return;
         if (this.options.pinterestpixelId === undefined) {
             return;
         }
@@ -478,7 +476,7 @@ export let metrica = {
                 m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
                 m[i].l = 1 * new Date(); k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
             })
-                (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+            (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
             ym(this.options.yandexmetrica, "init", {
                 clickmap: true,
@@ -1056,7 +1054,6 @@ export let dailymotion = {
     "options": {},
     "cookies": ['ts', 'dmvk', 'hist', 'v1st', 's_vi'],
     "js": function () {
-        return;
         TarteAuCitron.fallback(['dailymotion_player'], function (x) {
             let frame_title = TarteAuCitron.fixSelfXSS(TarteAuCitron.getElemAttr(x, "title") || 'Dailymotion iframe'),
                 video_id = TarteAuCitron.getElemAttr(x, "videoID"),
@@ -1090,7 +1087,6 @@ export let dailymotion = {
         });
     },
     "fallback": function () {
-        return;
         let id = 'dailymotion';
         TarteAuCitron.fallback(['dailymotion_player'], function (elem) {
             elem.style.width = elem.getAttribute('width') + 'px';
@@ -1724,9 +1720,7 @@ export let gajs = {
     "uri": "https://policies.google.com/privacy",
     "needConsent": true,
     "options": {},
-    "cookies": [],
-    "pouet": (function () {
-        return [];
+    "cookies": function () {
         let googleIdentifier = this.options.gajsUa,
             tagUaCookie = '_gat_gtag_' + googleIdentifier,
             tagGCookie = '_ga_' + googleIdentifier;
@@ -1735,7 +1729,7 @@ export let gajs = {
         tagGCookie = tagGCookie.replace(/G-/g, '');
 
         return ['_ga', '_gat', '_gid', '__utma', '__utmb', '__utmc', '__utmt', '__utmz', tagUaCookie, tagGCookie];
-    })(),
+    },
     "js": function () {
         window._gaq = window._gaq || [];
         window._gaq.push(['_setAccount', this.options.gajsUa]);
@@ -1766,8 +1760,7 @@ export let analytics = {
     "uri": "https://policies.google.com/privacy",
     "needConsent": true,
     "options": {},
-    "cookies": (function () {
-        return [];
+    "cookies": function () {
         let googleIdentifier = this.options.analyticsUa,
             tagUaCookie = '_gat_gtag_' + googleIdentifier,
             tagGCookie = '_ga_' + googleIdentifier;
@@ -1776,7 +1769,7 @@ export let analytics = {
         tagGCookie = tagGCookie.replace(/G-/g, '');
 
         return ['_ga', '_gat', '_gid', '__utma', '__utmb', '__utmc', '__utmt', '__utmz', tagUaCookie, tagGCookie];
-    })(),
+    },
     "js": function () {
         window.GoogleAnalyticsObject = 'ga';
         window.ga = window.ga || function () {
@@ -1818,8 +1811,7 @@ export let gtag = {
     "uri": "https://policies.google.com/privacy",
     "needConsent": true,
     "options": {},
-    "cookies": (function () {
-        return [];
+    "cookies": function () {
         let googleIdentifier = this.options.gtagUa,
             tagUaCookie = '_gat_gtag_' + googleIdentifier,
             tagGCookie = '_ga_' + googleIdentifier;
@@ -1828,7 +1820,7 @@ export let gtag = {
         tagGCookie = tagGCookie.replace(/G-/g, '');
 
         return ['_ga', '_gat', '_gid', '__utma', '__utmb', '__utmc', '__utmt', '__utmz', tagUaCookie, tagGCookie];
-    })(),
+    },
     "js": function () {
         window.dataLayer = window.dataLayer || [];
         TarteAuCitron.addScript('https://www.googletagmanager.com/gtag/js?id=' + this.options.gtagUa, '', function () {
@@ -1859,15 +1851,14 @@ export let firebase = {
     "uri": "https://firebase.google.com/support/privacy",
     "needConsent": true,
     "options": {},
-    "cookies": (function () {
-        return [];
+    "cookies": function () {
         let googleIdentifier = this.options.firebaseMeasurementId,
             tagGCookie = '_ga_' + googleIdentifier;
 
         tagGCookie = tagGCookie.replace(/G-/g, '');
 
         return ['_ga', tagGCookie];
-    })(),
+    },
     "js": function () {
 
         if (this.options.firebaseApiKey === undefined) {
@@ -2877,7 +2868,6 @@ export let tagcommander = {
     "options": {},
     "cookies": [],
     "js": function () {
-        return;
         if (this.options.tagcommanderid === undefined) {
             return;
         }
@@ -3072,7 +3062,6 @@ export let vimeo = {
     "options": {},
     "cookies": ['__utmt_player', '__utma', '__utmb', '__utmc', '__utmv', 'vuid', '__utmz', 'player'],
     "js": function () {
-        return;
         TarteAuCitron.fallback(['vimeo_player'], function (x) {
             let frame_title = TarteAuCitron.fixSelfXSS(TarteAuCitron.getElemAttr(x, "data-title") || TarteAuCitron.getElemAttr(x, "title") || 'Vimeo iframe'),
                 video_width = TarteAuCitron.getElemAttr(x, "data-width") || TarteAuCitron.getElemAttr(x, "width"),
@@ -3487,15 +3476,15 @@ export let youtube = {
                 attrs = ["theme", "rel", "controls", "showinfo", "autoplay", "mute", "start", "loop"],
                 params = attrs.filter(function (a) {
 
-                  return TarteAuCitron.getElemAttr(x, a) !== null;
+                    return TarteAuCitron.getElemAttr(x, a) !== null;
                 }).map(function (a) {
-                  return a + "=" + TarteAuCitron.getElemAttr(x, a);
-               }).join("&");
+                    return a + "=" + TarteAuCitron.getElemAttr(x, a);
+                }).join("&");
 
             console.log(params);
 
             if(TarteAuCitron.getElemAttr(x, "loop") === 1) {
-               params = params + "&playlist=" + video_id;
+                params = params + "&playlist=" + video_id;
             }
 
             if (video_id === undefined) {
@@ -3783,9 +3772,7 @@ export let multiplegtag = {
     "uri": "https://support.google.com/analytics/answer/6004245",
     "needConsent": true,
     "options": {},
-    "cookies": (function () {
-        return [];
-
+    "cookies": function () {
         let cookies = ['_ga', '_gat', '_gid', '__utma', '__utmb', '__utmc', '__utmt', '__utmz'];
 
         if (this.options.multiplegtagUa !== undefined) {
@@ -3796,7 +3783,7 @@ export let multiplegtag = {
         }
 
         return cookies;
-    })(),
+    },
     "js": function () {
         window.dataLayer = window.dataLayer || [];
 
@@ -4750,7 +4737,7 @@ export let affilae = {
     "js": function () {
 
         if (this.options.affilae === undefined) {
-           return;
+            return;
         }
 
         window._ae = { "pid": this.options.affilae };
@@ -4774,13 +4761,13 @@ export let canalu = {
                 frame_url = 'https://www.canal-u.tv/video/embed_code_plugin.1/' + video_title;
 
             return '<div style="position:relative;padding-bottom:56.25%;padding-top:10px;height:0;overflow:hidden;">' +
-                   '<iframe src="' + frame_url + '?width=100%&amp;height=100%" ' +
-                        'style="position:absolute;top:0;left:0;width:100%;height: 100%;" ' +
-                        'frameborder="0" ' +
-                        'allowfullscreen ' +
-                        'scrolling="no">' +
-                   '</iframe>' +
-                   '</div>';
+                '<iframe src="' + frame_url + '?width=100%&amp;height=100%" ' +
+                'style="position:absolute;top:0;left:0;width:100%;height: 100%;" ' +
+                'frameborder="0" ' +
+                'allowfullscreen ' +
+                'scrolling="no">' +
+                '</iframe>' +
+                '</div>';
         });
     },
     "fallback": function () {
@@ -4833,4 +4820,3 @@ export let studizz = {
         TarteAuCitron.addScript('https://webchat.studizz.fr/webchat.js?token=' + this.options.studizzToken);
     }
 };
-
