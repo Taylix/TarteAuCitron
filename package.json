@@ -1,0 +1,30 @@
+{
+  "name": "tarteaucitron",
+  "main": "TarteaucitronModule.js",
+  "description": "Comply to the European cookie law",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Taylix/TarteAuCitron.git"
+  },
+  "keywords": [
+    "cookie",
+    "law",
+    "rgpd",
+    "gdpr",
+    "cookie",
+    "symfony",
+    "module"
+  ],
+  "author": "amauri.io",
+  "contributors": ["Taylix"],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Taylix/TarteAuCitron/issues"
+  },
+  "homepage": "https://github.com/Taylix/TarteAuCitron#readme"
+}
