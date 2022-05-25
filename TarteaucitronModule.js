@@ -1,4 +1,4 @@
-import { extend } from '../js/_helpers';
+import { extend } from './_helpers';
 
 // Import design
 import './scss/tarteaucitron.scss';
@@ -6,13 +6,6 @@ import './scss/tarteaucitron.scss';
 import * as services from './services';
 import en from "./i18n/en";
 
-/**
- * Set section background color to header
- *
- * @param   {Object} header - Header element to change
- * @param   {Array} elems - Elements to get value
- * @param   {Object} options - Object to set options
- */
 class TarteAuCitron {
     #availableLanguages = ['bg', 'ca', 'cn', 'cs', 'da', 'de', 'el', 'en', 'es', 'fi', 'fr', 'hu', 'it', 'ja', 'lt', 'lv', 'nl', 'no', 'oc', 'pl', 'pt', 'ro', 'ru', 'se', 'sk', 'sv', 'tr', 'vi', 'zh'];
     #version = 20220420;
@@ -71,6 +64,7 @@ class TarteAuCitron {
         reloadThePage: false,
         forceExpire: null, /* Force expire after (int) days, default 365 days*/
         cookieDomain: null, /* Shared cookie for multisite */
+        customTranslation: {}
     };
 
     constructor(options = {}){
@@ -109,12 +103,7 @@ class TarteAuCitron {
     }
 
     static fallback = (matchClass, content, noInner) => {
-        let //elems = document.getElementsByTagName('*'),
-            i,
-            index = 0;
-
         let elems = document.getElementsByClassName(matchClass);
-        console.log('Fallback on '  + matchClass, elems);
 
         for(let item of elems){
             console.log(item);
@@ -195,6 +184,8 @@ class TarteAuCitron {
 
         this.#lang = await import(`./i18n/${language}`)
             .then(result => result.default);
+
+        this.#lang = this.#addOrUpdate(this.#lang, this.#options.customTranslation);
 
         // Fetch advertising to catch adBlocker
         this.#options.noAdsBlocker = await this.checkForAdBlocker();
@@ -317,15 +308,15 @@ class TarteAuCitron {
                 'id': 'mainLineOffset',
             });
         tacMainLine.appendChild(this.#createElement('div', tacMainLine, {
-                'class': 'tacH1',
-                'role': 'heading',
-                'aria-level': '1',
-                'id': 'dialogTitle',
-            }, lang.title));
+            'class': 'tacH1',
+            'role': 'heading',
+            'aria-level': '1',
+            'id': 'dialogTitle',
+        }, lang.title));
 
         let tacInfo = this.#createElement('div', tacMainLine, {
-                'id' : 'info',
-            }, lang.disclaimer);
+            'id' : 'info',
+        }, lang.disclaimer);
 
         if (this.#options.privacyUrl !== "") {
             this.#createElement('button', tacInfo, {
@@ -666,9 +657,9 @@ class TarteAuCitron {
                     'class': 'name',
                 });
                 this.#createElement('div', name, {
-                    'class': 'tacH3',
-                    'role': 'heading',
-                    'aria-level': '2',
+                        'class': 'tacH3',
+                        'role': 'heading',
+                        'aria-level': '2',
                     }, lang[cat].title
                 );
                 this.#createElement('span', name, {}, lang[cat].details);
@@ -777,9 +768,9 @@ class TarteAuCitron {
             this.#added[service.key] = true;
             service.options = options;
             let line = this.#createElement('li', null, {
-                'id': service.key + 'Line',
-                'class': 'line'
-            }),
+                    'id': service.key + 'Line',
+                    'class': 'line'
+                }),
                 name = this.#createElement('div', line, {
                     'class': 'name',
                 });
@@ -1346,32 +1337,10 @@ class TarteAuCitron {
         this.#uiRemoveClass('tacIcon', 'show');
         this.#uiRemoveClass('alertSmall', 'show');
 
-
         // Show
         this.#uiAddClass('tarteaucitronRoot', 'show');
         this.#uiAddClass('back', 'show');
         this.#uiAddClass('alertBig', 'show');
-        // this.#uiCss('alertBig', 'display', 'flex');
-        // this.#uiCss('tarteaucitronRoot', 'height', '100%');
-        //this.#uiAddClass(c + 'Root', 'tarteaucitronBeforeVisible');
-/*
-        //ie compatibility
-        let tacOpenAlertEvent;
-        if (typeof (Event) === 'function') {
-            tacOpenAlertEvent = new Event("tac.open_alert");
-        } else if (typeof (document.createEvent) === 'function') {
-            tacOpenAlertEvent = document.createEvent('Event');
-            tacOpenAlertEvent.initEvent("tac.open_alert", true, true);
-        }
-        //end ie compatibility
-
-        if (document.getElementById('alertBig') !== null) {
-            document.getElementById('alertBig').focus();
-        }
-
-        if (typeof (window.dispatchEvent) === 'function') {
-            window.dispatchEvent(tacOpenAlertEvent);
-        }*/
     }
 
     #uiCloseAlert = () => {
@@ -1582,15 +1551,15 @@ class TarteAuCitron {
             return 0;
         });
         let cookieLine = this.#createElement('div', null, {
-            'class': 'clLine',
-        }),
+                'class': 'clLine',
+            }),
             cl = null
         ;
 
         if (document.cookie !== '') {
             for (i = 0; i < nb; i += 1) {
                 let content = null,
-                name  = cookies[i].split('=', 1).toString().replace(/ /g, '');
+                    name  = cookies[i].split('=', 1).toString().replace(/ /g, '');
 
                 if (this.#cookieOwner[name] !== undefined && this.#cookieOwner[name].join(' // ') !== savedname) {
                     savedname = this.#cookieOwner[name].join(' // ');
@@ -1706,6 +1675,20 @@ class TarteAuCitron {
         return engageDiv;
     }
 
+    #addOrUpdate = (source, custom) => {
+        /**
+         Utility function to Add or update the fields of obj1 with the ones in obj2
+         */
+        for(let key in custom){
+            if(custom[key] instanceof Object){
+                source[key] = this.#addOrUpdate(source[key], custom[key]);
+            }else{
+                source[key] = custom[key];
+            }
+        }
+        return source;
+    }
+
     #getLanguage() {
         let defaultLanguage = 'en';
 
@@ -1764,6 +1747,17 @@ class TarteAuCitron {
                 document.head.appendChild(script);
             }
         }
+    }
+
+    addService = (options) => {
+        try{
+            let key = options.key;
+            services[key] = options;
+        } catch (e) {
+            console.log(e);
+            console.error('key is not in options')
+        }
+
     }
 
     static getElemWidth = (elem) => {
