@@ -1737,7 +1737,6 @@ class TarteAuCitron {
                         let state = script.readyState;
                         if (!done && (!state || /loaded|complete/.test(state))) {
                             done = true;
-                            console.log('OK, on callback maintenant');
                             callback();
                         }
                     };
@@ -1747,7 +1746,6 @@ class TarteAuCitron {
             }
 
             if (!internal) {
-                console.warn('Append script');
                 document.head.appendChild(script);
             }
         }
@@ -1758,7 +1756,6 @@ class TarteAuCitron {
             let key = options.key;
             services[key] = options;
         } catch (e) {
-            console.log(e);
             console.error('key is not in options')
         }
 
