@@ -1823,22 +1823,25 @@ export let gtag = {
     },
     "js": function () {
         window.dataLayer = window.dataLayer || [];
+        let options = this.options;
         TarteAuCitron.addScript('https://www.googletagmanager.com/gtag/js?id=' + this.options.gtagUa, '', function () {
-            window.gtag = function gtag() { dataLayer.push(arguments); }
+            let gtag = function gtag() { dataLayer.push(arguments); }
+            window.gtag = gtag;
+            console.log(arguments);
             gtag('js', new Date());
 
-            if (this.options.gtagCrossdomain) {
+            if (options.gtagCrossdomain) {
                 /**
                  * https://support.google.com/analytics/answer/7476333?hl=en
                  * https://developers.google.com/analytics/devguides/collection/gtagjs/cross-domain
                  */
-                gtag('config', this.options.gtagUa, { 'anonymize_ip': true }, { linker: { domains: this.options.gtagCrossdomain, } });
+                gtag('config', options.gtagUa, { 'anonymize_ip': true }, { linker: { domains: options.gtagCrossdomain, } });
             } else {
-                gtag('config', this.options.gtagUa, { 'anonymize_ip': true });
+                gtag('config', options.gtagUa, { 'anonymize_ip': true });
             }
 
-            if (typeof this.options.gtagMore === 'function') {
-                this.options.gtagMore();
+            if (typeof options.gtagMore === 'function') {
+                options.gtagMore();
             }
         });
     }

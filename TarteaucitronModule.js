@@ -106,7 +106,6 @@ class TarteAuCitron {
         let elems = document.getElementsByClassName(matchClass);
 
         for(let item of elems){
-            console.log(item);
             if (typeof content === 'function') {
                 if (noInner === true) {
                     content(item);
@@ -195,6 +194,9 @@ class TarteAuCitron {
             tacRoot = this.#createElement('div', null, {
                 'id': 'tarteaucitronRoot',
                 'class': 'tac-' + this.#options.orientation.toLowerCase(),
+                'data-nosnippet': 'true',
+                'lang': language,
+                'role': 'region',
             }),
             orientation = this.#options.orientation === 'bottom' ? 'Bottom' : 'Top',
             cat = ['ads', 'analytic', 'api', 'comment', 'social', 'support', 'video', 'other'],
@@ -271,6 +273,7 @@ class TarteAuCitron {
 
         // Create TAC Dom
         this.#createElement('div', tacRoot,  {
+            'id': 'tacBack',
             'class': 'back',
         });
 
@@ -1203,7 +1206,7 @@ class TarteAuCitron {
         this.#uiAddClass('tarteaucitronRoot', 'show');
         this.#uiAddClass('tarteaucitronRoot', 'openPanel');
         this.#uiAddClass('tarteaucitron', 'show');
-        this.#uiAddClass('back', 'show');
+        this.#uiAddClass('tacBack', 'show');
         this.#uiAddClass('body', 'tarteaucitron-modal-open');
 
         let tacOpenPanelEvent = new Event("tac.open_panel");
@@ -1221,6 +1224,7 @@ class TarteAuCitron {
 
         this.#uiRemoveClass('tarteaucitronRoot', 'openPanel')
 
+        console.log(TarteAuCitron.checkIfExist('tarteaucitron'));
         if (TarteAuCitron.checkIfExist('tarteaucitron')) {
             // accessibility: manage focus on close panel
             if (TarteAuCitron.checkIfExist('tarteaucitronCloseAlert')) {
@@ -1245,16 +1249,21 @@ class TarteAuCitron {
                 }
             }
             if(nbPending === 0){
-                this.#uiRemoveClass('back', 'show');
+                this.#uiRemoveClass('tacBack', 'show');
                 this.#uiRemoveClass('alertBig', 'show');
+                this.#uiRemoveClass('tarteaucitronRoot', 'show')
 
                 this.#uiRemoveClass('body', 'tarteaucitron-modal-open');
-                /*if (document.getElementsByTagName('body')[0].classList !== undefined) {
-                    document.getElementsByTagName('body')[0].classList.remove('tarteaucitron-modal-open');
-                }*/
+
+                this.#uiAddClass('alertSmall', 'show');
+                this.#uiAddClass('tacIcon', 'show');
             } else {
                 this.#uiAddClass('alertBig', 'show');
             }
+        } else {
+            console.log('OKLOKOK');
+            this.#uiRemoveClass('tacBack', 'show')
+            this.#uiRemoveClass('tarteaucitronRoot', 'show')
         }
 
         if (TarteAuCitron.checkIfExist('clCtn') && TarteAuCitron.checkIfExist('cookieNumber')) {
@@ -1272,7 +1281,7 @@ class TarteAuCitron {
         if (this.#options.reloadThePage === true) {
             window.location.reload();
         } else {
-            this.#uiCss('back', 'display', 'none');
+            this.#uiCss('tacBack', 'display', 'none');
         }
         /*if (document.getElementsByTagName('body')[0].classList !== undefined) {
             document.getElementsByTagName('body')[0].classList.remove('tarteaucitron-modal-open');
@@ -1330,7 +1339,7 @@ class TarteAuCitron {
 
         // Show
         this.#uiAddClass('tarteaucitronRoot', 'show');
-        this.#uiAddClass('back', 'show');
+        this.#uiAddClass('tacBack', 'show');
         this.#uiAddClass('alertBig', 'show');
     }
 
@@ -1340,7 +1349,7 @@ class TarteAuCitron {
         this.#uiRemoveClass('tarteaucitron', 'show');
         this.#uiRemoveClass('alertBig', 'show');
         this.#uiRemoveClass('percentage', 'show');
-        this.#uiRemoveClass('back', 'show');
+        this.#uiRemoveClass('tacBack', 'show');
 
         this.#uiAddClass('tacIcon', 'show');
         this.#uiAddClass('alertSmall', 'show');
@@ -1364,12 +1373,12 @@ class TarteAuCitron {
             this.#uiAddClass('clCtn', 'show');
             togglediv.setAttribute("aria-expanded", "true");
             this.#uiRemoveClass('tarteaucitron', 'show');
-            this.#uiAddClass('back', 'show');
+            this.#uiAddClass('tacBack', 'show');
 
         } else {
             togglediv.setAttribute("aria-expanded", "false");
             this.#uiRemoveClass('clCtn', 'show');
-            this.#uiRemoveClass('back', 'show');
+            this.#uiRemoveClass('tacBack', 'show');
             this.#uiRemoveClass('tarteaucitron', 'show');
         }
     }
@@ -1528,11 +1537,13 @@ class TarteAuCitron {
             host = window.location.hostname
         ;
 
+        let cookieOwner = this.#cookieOwner
+
         cookies = cookies.sort(function (a, b) {
             namea = a.split('=', 1).toString().replace(/ /g, '');
             nameb = b.split('=', 1).toString().replace(/ /g, '');
-            c = (tarteaucitron.cookie.owner[namea] !== undefined) ? tarteaucitron.cookie.owner[namea] : '0';
-            d = (tarteaucitron.cookie.owner[nameb] !== undefined) ? tarteaucitron.cookie.owner[nameb] : '0';
+            c = (cookieOwner[namea] !== undefined) ? cookieOwner[namea] : '0';
+            d = (cookieOwner[nameb] !== undefined) ? cookieOwner[nameb] : '0';
             if (c + a > d + b) {
                 return 1;
             }
@@ -1726,6 +1737,7 @@ class TarteAuCitron {
                         let state = script.readyState;
                         if (!done && (!state || /loaded|complete/.test(state))) {
                             done = true;
+                            console.log('OK, on callback maintenant');
                             callback();
                         }
                     };
@@ -1735,6 +1747,7 @@ class TarteAuCitron {
             }
 
             if (!internal) {
+                console.warn('Append script');
                 document.head.appendChild(script);
             }
         }
