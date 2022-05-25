@@ -754,15 +754,6 @@ class TarteAuCitron {
             isAllowed = ((cookie.indexOf(service.key + '=true') >= 0) || (!service.needConsent && cookie.indexOf(service.key + '=false') < 0)),
             isResponded = (cookie.indexOf(service.key + '=false') >= 0 || cookie.indexOf(service.key + '=true') >= 0),
             isDNTRequested = (navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1" || window.doNotTrack === "1");
-        console.log('Service ' + serviceId,
-            ' isNavigating ' + (isNavigating ? 'Oui':'Non'),
-            ' isAutostart ' + (isAutostart ? 'Oui':'Non'),
-            ' isWaiting ' + (isWaiting ? 'Oui':'Non'),
-            ' isDenied ' + (isDenied ? 'Oui':'Non'),
-            ' isAllowed ' + (isAllowed ? 'Oui':'Non'),
-            ' isResponded ' + (isResponded ? 'Oui':'Non'),
-            ' isDNTRequested ' + (isDNTRequested ? 'Oui':'Non'),
-        );
 
         if (this.#added[service.key] !== true) {
             this.#added[service.key] = true;
