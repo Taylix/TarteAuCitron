@@ -2,6 +2,7 @@
   "name": "tarteaucitron",
   "main": "TarteaucitronModule.js",
   "description": "Comply to the European cookie law",
+  "version": "0;0.0",
   "dependencies": {},
   "devDependencies": {},
   "scripts": {
