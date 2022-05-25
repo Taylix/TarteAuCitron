@@ -3218,7 +3218,6 @@ export let vimeo = {
         });
     },
     "fallback": function () {
-        return;
         let id = 'vimeo';
         TarteAuCitron.fallback(['vimeo_player'], function (elem) {
             elem.style.width = elem.getAttribute('width') + 'px';
