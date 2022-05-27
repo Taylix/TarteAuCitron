@@ -1825,9 +1825,7 @@ export let gtag = {
         window.dataLayer = window.dataLayer || [];
         let options = this.options;
         TarteAuCitron.addScript('https://www.googletagmanager.com/gtag/js?id=' + this.options.gtagUa, '', function () {
-            let gtag = function gtag() { dataLayer.push(arguments); }
-            window.gtag = gtag;
-
+            function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
             if (options.gtagCrossdomain) {
